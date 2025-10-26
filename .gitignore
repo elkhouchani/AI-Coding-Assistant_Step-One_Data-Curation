@@ -1,0 +1,26 @@
+# Python cache
+__pycache__/
+*.py[cod]
+env/
+
+# Virtual environment
+.venv/
+venv/
+
+# VSCode settings
+*.log
+.vscode/clear\
+.idea/
+
+
+# Outputs
+outputs/
+
+# Environment files
+.env
+
+
+#Unecessary files
+configs/
+raw/
+quarantine/

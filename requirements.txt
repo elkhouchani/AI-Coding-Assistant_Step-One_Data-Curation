@@ -1,0 +1,7 @@
+PyYAML
+requests
+tqdm
+python-dotenv
+gitpython
+pandas
+PyGithub
