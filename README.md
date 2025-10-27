@@ -36,7 +36,19 @@ A dedicated script license_security.py:
 ```
 reports/quarantine.xlsx
 ```
-### 3- Code Extraction
+### 3- Repository Curation
+Using script in curate_debug_repos.py to:
+
+- Remove duplicates and incomplete entries.
+- Produce a refined dataset of valid repositories.
+
+Output:
+```
+outputs/debuggin_dataset.jsonl
+```
+
+
+### 4- Code Extraction
 
 Using the script extract_debug_code.py, each valid repository was:
 
@@ -48,7 +60,20 @@ Using the script extract_debug_code.py, each valid repository was:
 data/curated/debug_code.jsonl
 ```
 
-### 4- Data Cleaning and Structuring
+### 5- Bugfix Pair Generation
+
+using the script extract_bugfix_pairs.py to:
+
+- Identify potential “buggy” vs “fixed” code pairs.
+- Structure data into {task, input, output} format.
+
+Output:
+```
+data/curated/bugfix_pairs.jsonl
+```
+
+
+### 6- Data Cleaning and Structuring
 
 A separate cleaning script standardized the data format and ensured uniformity across all tasks.
 
@@ -69,7 +94,37 @@ Example:
 }
 ```
 
-### 5- Data Validation
+## Adding Instructions
+In adding_instructions.py
+
+Added natural-language instructions describing the task, so the dataset can be used with instruction-following models (e.g., LLM fine-tuning).
+
+Output:
+```
+debugging_with_instruction.jsonl
+```
+
+## 🧱 Final Data Format
+Each JSON line follows this schema:
+```
+{
+  "instruction": "Fix the bug in the following Python code.",
+  "task": "debugging",
+  "input": "<buggy or incomplete debugging-related code>",
+  "output": "<corrected or improved version of the same code>"
+}
+```
+Example:
+```
+{
+  "instruction": "Fix the bug in the following Python code.",
+  "task": "debugging",
+  "input": "try:\n    x = 1 / 0\nprint('Done')",
+  "output": "try:\n    x = 1 / 0\nexcept ZeroDivisionError:\n    print('Error: division by zero')\nprint('Done')"
+}
+```
+
+## 🧪 Validation Results
 
 A final validation script (validate_jsonl.py) ensured:
 ✅ All lines are valid JSON
@@ -91,9 +146,10 @@ Validation Results:
 | Total samples        | 550                       |
 | Task type            | Debugging                 |
 | Data format          | JSONL (UTF-8)             |
-| Fields               | `task`, `input`, `output` |
+| Fields               | `instructoin` `task` 
+|                      |    `input`  `output`     |
 | License compliance   | 100% verified             |
-| Validation status    | ✅ Passed                  |
+| Validation status    | ✅ Passed                 
 
 
 ## 💡 Outcome
