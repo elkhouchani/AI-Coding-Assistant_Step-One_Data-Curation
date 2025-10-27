@@ -94,7 +94,7 @@ Example:
 }
 ```
 
-## Adding Instructions
+## 7- Adding Instructions
 In adding_instructions.py
 
 Added natural-language instructions describing the task, so the dataset can be used with instruction-following models (e.g., LLM fine-tuning).
